@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
     Autorization.associate = (models) => {
-        Autorization.belongsTo(models.menu_entry, {
+        Autorization.belongsTo(models.menu_entries, {
             onDelete: 'CASCADE',
             foreignKey: {
               field: "menu_entry_id",

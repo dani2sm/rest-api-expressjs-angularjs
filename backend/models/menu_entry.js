@@ -1,7 +1,7 @@
 const sequelize = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  const MenyEntry = sequelize.define("menu_entry", {
+  const MenyEntry = sequelize.define("menu_entries", {
     code : {
       type: DataTypes.STRING,
       allowNull: false,
