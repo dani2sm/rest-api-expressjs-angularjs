@@ -1,6 +1,6 @@
 'use strict';
 
-const errorMessages = {
+module.exports = {
     SERVER_ERROR: "Oops..Server error!!! Please conctact the system admin",
     NOT_FOUND: "The submitted request can not be understood",
     UNPARSABLE_REQUEST: "Can not parse the request. Please try again with correct format",
@@ -16,4 +16,4 @@ const errorMessages = {
     POST_ID_INVALID: "Post id must be UUID v4",
     POST_NOT_FOUND: "The post requested not found",
 };
-export default errorMessages;
+

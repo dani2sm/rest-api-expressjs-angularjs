@@ -1,44 +1,40 @@
 var express = require('express');
 var router = express.Router();
-var Post = require('../models/Post');
+var post = require('../models').posts;
+const errorMessages = require('../util/errorMessages');
 
 router.get('/:id?', function (req, res, next) {
     if (req.params.id) {
-
-        Post.getPostById(req.params.id, function (err, rows) {
-            if (err) {
-                res.json(err);
-            }
-            else {
-                res.json(rows);
-            }
-        });
+        return post.findById(id, {})
+            .then((post) => {
+                if (!post) {
+                    return res.status(404).send({
+                        message: errorMessages.NOT_FOUND,
+                    });
+                }
+                return res.status(200).send(post);
+            })
+            .catch((error) => res.status(400).send(error));
     }
     else {
-
-        Post.getAllPosts(function (err, rows) {
-            if (err) {
-                res.json(err);
-            }
-            else {
-                res.json(rows);
-            }
-        });
+        return post.findAll(
+            {
+                order: [['createdAt', 'DESC'],],
+            })
+            .then((posts) => {
+                return res.json(posts);
+            });
     }
 });
 
 router.post('/', function (req, res, next) {
 
-    Post.addPost(req.body, function (err, count) {
-
-        console.log(req.body);
-        if (err) {
-            res.json(err);
-        }
-        else {
-            res.json(req.body);//or return count for 1 & 0
-        }
-    });
+    return post
+        .create({
+            title: req.body.title,
+        })
+        .then((post) => res.status(201).send(post))
+        .catch((error) => res.status(400).send(error));
 });
 
 router.post('/:id', function (req, res, next) {

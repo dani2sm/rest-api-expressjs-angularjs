@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const user = require('../models').users;
+const errorMessages = require('../util/errorMessages');
 
 
 router.get('/:id?', function (req, res, next) {
@@ -10,7 +11,7 @@ router.get('/:id?', function (req, res, next) {
             .then((user) => {
                 if (!user) {
                     return res.status(404).send({
-                        message: 'user Not Found',
+                        message: errorMessages.USER_NOT_FOUND,
                     });
                 }
                 return res.status(200).send(user);
@@ -18,14 +19,13 @@ router.get('/:id?', function (req, res, next) {
             .catch((error) => res.status(400).send(error));
     }
     else {
-        return user
-            .findAll({
+        return user.findAll({
                 order: [
                     ['createdAt', 'DESC'],
                 ],
-            }).then((result) => {
-                let hbsObject = { taco: result };
-                return res.json(hbsObject);
+            })
+            .then((result) => {
+                return res.json(result);
             });
     }
 });
@@ -47,7 +47,7 @@ router.delete('/:id', function (req, res, next) {
         .then(user => {
             if (!user) {
                 return res.status(400).send({
-                    message: 'user Not Found',
+                    message: errorMessages.USER_NOT_FOUND,
                 });
             }
             return user
@@ -65,7 +65,7 @@ router.put('/:id', function (req, res, next) {
         .then(user => {
             if (!user) {
                 return res.status(404).send({
-                    message: 'user Not Found',
+                    message: errorMessages.USER_NOT_FOUND,
                 });
             }
             return user
