@@ -1,21 +1,21 @@
 {
-    "name": "eat-dos-tacs",
+    "name": "codexway",
     "version": "0.0.1",
     "description": "",
-    "main": "index.js",
+    "main": "server.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": ""
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/ricopella/eat-dos-taco.git"
+        "url": ""
     },
     "author": "Narin Sundarabhaya",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/ricopella/eat-dos-tacos/issues"
+        "url": ""
     },
-    "homepage": "https://github.com/ricopella/eat-dos-tacos#readme",
+    "homepage": "",
     "dependencies": {
         "body-parser": "^1.17.2",
         "express": "^4.15.4",

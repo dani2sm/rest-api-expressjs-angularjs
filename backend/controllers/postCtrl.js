@@ -1,12 +1,12 @@
 'use strict';
 const express = require('express'),
-    db = require('../models');
+    postService = require('../services/postService'),
+    errorMessages = require('../util/errorMessages');
 
-const operations = {
+const posts = {
 	list: (req, resp)=>{
 		const q = {
-			userName: req.params.userName,
-			...req.query
+			username: req.params.username
 		}
 		return postService
 				.findAll(q)
