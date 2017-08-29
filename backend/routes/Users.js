@@ -1,55 +1,80 @@
 var express = require('express');
 var router = express.Router();
+const user = require('../models').users;
 
-var Posts = require('./controllers/userCtrl');
 
-/*
+router.get('/:id?', function (req, res, next) {
+    if (req.params.id) {
+        return user
+            .findById(id, {})
+            .then((user) => {
+                if (!user) {
+                    return res.status(404).send({
+                        message: 'user Not Found',
+                    });
+                }
+                return res.status(200).send(user);
+            })
+            .catch((error) => res.status(400).send(error));
+    }
+    else {
+        return user
+            .findAll({
+                order: [
+                    ['createdAt', 'DESC'],
+                ],
+            }).then((result) => {
+                let hbsObject = { taco: result };
+                return res.json(hbsObject);
+            });
+    }
+});
+
 router.post('/', function (req, res, next) {
 
-    userService.addUser(req.body, function (err, count) {
-
-        console.log(req.body);
-        if (err) {
-            res.json(err);
-        }
-        else {
-            res.json(req.body);//or return count for 1 & 0
-        }
-    });
+    return user
+        .create({
+            title: req.body.title,
+        })
+        .then((user) => res.status(201).send(user))
+        .catch((error) => res.status(400).send(error));
 });
 
-router.post('/:id', function (req, res, next) {
-    userService.deleteAll(req.body, function (err, count) {
-        if (err) {
-            res.json(err);
-        }
-        else {
-            res.json(count);
-        }
-    });
-});
 
 router.delete('/:id', function (req, res, next) {
-    User.deleteUser(req.params.id, function (err, count) {
-        if (err) {
-            res.json(err);
-        }
-        else {
-            res.json(count);
-        }
-    });
+    return user
+        .findById(req.params.id)
+        .then(user => {
+            if (!user) {
+                return res.status(400).send({
+                    message: 'user Not Found',
+                });
+            }
+            return user
+                .destroy()
+                .then(() => res.status(204).send())
+                .catch((error) => res.status(400).send(error));
+        })
+        .catch((error) => res.status(400).send(error));
 });
 
 router.put('/:id', function (req, res, next) {
 
-    User.updateUser(req.params.id, req.body, function (err, rows) {
-
-        if (err) {
-            res.json(err);
-        }
-        else {
-            res.json(rows);
-        }
-    });
+    return user
+        .findById(req.params.userId, {})
+        .then(user => {
+            if (!user) {
+                return res.status(404).send({
+                    message: 'user Not Found',
+                });
+            }
+            return user
+                .update({
+                    username: req.body.username || user.username,
+                })
+                .then(() => res.status(200).send(user))
+                .catch((error) => res.status(400).send(error));
+        })
+        .catch((error) => res.status(400).send(error));
 });
-module.exports = router;*/
+module.exports = router;

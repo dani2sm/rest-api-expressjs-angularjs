@@ -16,9 +16,9 @@ module.exports = {
                 order: [
                     ['createdAt', 'DESC'],
                 ],
-            })
-            .then((users) => res.status(200).send(users))
-            .catch((error) => res.status(400).send(error));
+            }).then((result) => {
+                    return result;
+        });
     },
 
     retrieve: function(id, res) {

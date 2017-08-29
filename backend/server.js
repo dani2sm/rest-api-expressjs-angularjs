@@ -3,6 +3,7 @@ const express = require('express'),
     methodOverride = require("method-override"),
     exphbs = require("express-handlebars"),
     routes = require("./controllers/taco_controller.js"),
+    users = require('./routes/Users');
     sequelize = require('sequelize'),
     app = express(),
     port = process.env.PORT || 3000,
@@ -18,6 +19,7 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 app.use("/", routes);
+app.use('/api/v1/users', users);
 
 db.sequelize.sync( /*{ force: true }*/ )
     .then(() => {
