@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var post = require('../models').posts;
-const errorMessages = require('../util/errorMessages');
+const express = require('express'),
+    router = express.Router(),
+    post = require('../models').posts,
+    errorMessages = require('../util/errorMessages');
 
 router.get('/:id?', function (req, res, next) {
     if (req.params.id) {
@@ -29,16 +29,13 @@ router.get('/:id?', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
 
-    return post
-        .create({
-            title: req.body.title,
-        })
+    return post.create(req.body)
         .then((post) => res.status(201).send(post))
         .catch((error) => res.status(400).send(error));
 });
 
 router.post('/:id', function (req, res, next) {
-    Post.deleteAll(req.body, function (err, count) {
+    post.destroy(req.body, function (err, count) {
         if (err) {
             res.json(err);
         }

@@ -1,0 +1,75 @@
+<nav class="navbar navbar-default" ng-controller="menuController">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#/achats">Gestion d'achats</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Paramétrage <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#/providers">Fournisseurs</a></li>
+            <li class="divider"></li>
+            <li><a href="#/ordonnateurs">Ordonnateurs</a></li>
+            <li class="divider"></li>
+            <li><a href="#/buyers">Acheteurs</a></li>
+            <li class="divider"></li>
+            <li><a href="#/receiversBE">Destinataires BE</a></li>
+            <li class="divider"></li>
+              <li><a href="#/currencies">Devises</a></li>
+              <li class="divider"></li>
+              <li><a href="#/mode_paiement">Mode paiement</a></li>
+              <li class="divider"></li>
+              <li><a href="#/accounts">Comptes</a></li>
+              <li class="divider"></li>
+            <li><a href="#/parametrages">Paramétrage</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" href="" aria-expanded="false">Suivi achats <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#/achats">Achats</a></li>
+            <li class="divider"></li>
+            <li><a href="#/achats_be">Bordereau d'envoi</a></li>
+            <li class="divider"></li>
+            <li><a href="#/caisse_ops">OPS de caisse</a></li>
+            <li class="divider"></li>
+            <li><a href="#/caisse_be">BE de caisse</a></li>
+              <!--<li class="divider"></li>
+              <li><a href="#/reglement">Règlement</a></li>
+              <li class="divider"></li>
+              <li><a href="#/impayes"><i>Impayés</i></a></li>
+              -->
+          </ul>
+        </li>
+        <li class="dropdown">
+            <a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Administration <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#/profils">Gestion des profiles</a></li>
+                <li class="divider"></li>
+                <li><a href="#/utilisateurs">Utilisateurs</a></li>
+                <li class="divider"></li>
+                <li><a href="#/authorizations">Gestion des droits</a></li>
+                <li class="divider"></li>
+                <li><a href="#/traces">Traçabilité</a></li>
+            </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" href="" aria-expanded="false">{{currentUser.firstname}} {{currentUser.lastname}} <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+              <!--
+            <li><a href="#"><span class="glyphicon glyphicon-heart-empty"></span> Mon compte</a></li>
+            <li class="divider"></li>
+            -->
+            <li ng-click="disconnect()"><a href=""><span class="glyphicon glyphicon-off"></span> Se déconnecter</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

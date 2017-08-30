@@ -1,0 +1,24 @@
+{
+  "name": "codexway",
+  "version": "1.0.0",
+  "main": "assets/css/main.css",
+  "ignore": [
+    ".jshintrc",
+    "**/*.txt"
+  ],
+  "dependencies": {
+    "angular": "1.4.7",
+    "angular-ui-router": "0.2.13",
+    "modernizr": "~2.8.2",
+    "jquery": "~1.11.2",
+    "moment": "~2.10.3",
+    "swiper": "~3.1.0",
+    "animate.css": "~3.3.0",
+    "bootstrap": "~3.3.5",
+    "font-awesome": "~3.0.2",
+    "rickshaw": "~1.6.0",
+    "perfect-scrollbar": "~0.6.16",
+    "angular-sanitize": "~1.6.2"
+  },
+  "devDependencies": {}
+}

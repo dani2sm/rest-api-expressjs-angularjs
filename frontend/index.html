@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="fr" ng-app="app" class="no-js" ng-controller="bodyController">
+	<!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Gestion d'achats</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
+
+		<link href="assets/css/normalize.min.css" rel="stylesheet">
+		<link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">		
+        <link href="vendor/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+
+		<link href="assets/css/fonts.css" rel="stylesheet">
+        <link href="assets/css/feather.css" rel="stylesheet">
+        <link href="vendor/font-awesome/css/font-awesome.css" rel="stylesheet">
+        
+         <link href="vendor/animate.css/animate.css" rel="stylesheet">
+        <link href="assets/css/main.css" rel="stylesheet">
+        <link href="assets/css/main.skins.css" rel="stylesheet">
+
+
+		<script src="assets/libs/jquery/jquery.1.11.2.min.js"></script>
+		<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+		<script src="assets/libs/angular/1.3.12/angular.js"></script>
+		<script src="assets/libs/angular/1.3.12/angular-route.js"></script>
+        <script src="assets/libs/angular/1.3.12/angular-cookies.js"></script>
+
+        <!--<script src="assets/libs/ui-bootstrap/ui-bootstrap-0.12.1.js"></script>-->
+        <script src="assets/libs/ui-bootstrap/ui-bootstrap-tpls-0.12.1.js"></script>
+
+
+        <script src="assets/libs/angular/1.3.12/angular-cookies.js"></script>
+		<!--
+		<script src="assets/libs/datatable/angular-datatables.js"></script>
+		-->
+		<script src="app/app.js"></script>
+        <script src="app/menu/menu.js"></script>
+        <script src="app/login/login.js"></script>
+		<script src="app/home/home.js"></script>
+        <script src="app/suivi_achats/achats/achats.js"></script>
+        <script src="app/suivi_achats/achats_be/achats_be.js"></script>
+		<script src="app/suivi_achats/caisse_be/caisse_be.js"></script>
+		<script src="app/suivi_achats/caisse_ops/caisse_ops.js"></script>
+		<script src="app/suivi_achats/reglement/reglement.js"></script>
+		<script src="app/suivi_achats/impayes/impayes.js"></script>
+		<script src="app/parametrage/providers/providers.js"></script>
+		<script src="app/parametrage/ordonnateurs/ordonnateurs.js"></script>
+		<script src="app/parametrage/utilisateurs/utilisateurs.js"></script>
+        <script src="app/parametrage/buyers/buyers.js"></script>
+        <script src="app/parametrage/receiver_be/receiver_be.js"></script>
+        <script src="app/parametrage/mode_paiement/mode_paiement.js"></script>
+        <script src="app/parametrage/mode_paiement/mode_paiement.js"></script>
+        <script src="app/parametrage/currency/currency.js"></script>
+        <script src="app/parametrage/accounts/accounts.js"></script>
+		<script src="app/parametrage/parametrages/parametrages.js"></script>
+		<script src="app/administration/administration.js"></script>
+		<script src="app/administration/profils/profils.js"></script>
+		<script src="app/administration/authorizations/authorizations.js"></script>
+		<script src="app/administration/traces/traces.js"></script>
+
+        <!-- Directives -->
+        <script src="assets/directives/nxdatepicker.js"></script>
+        <script src="assets/directives/errors.js"></script>
+        <!--  assets -->
+        <script src="assets/services/bootstrap.js"></script>
+
+		<!-- Services -->
+		<!--  applicatifs -->
+		<script src="app/services/error_service.js"></script>
+        <script src="app/services/buyer_service.js"></script>
+        <script src="app/services/receiver_be_service.js"></script>
+        <script src="app/services/organizer_service.js"></script>
+        <script src="app/services/currency_service.js"></script>
+        <script src="app/services/account_service.js"></script>
+		<script src="app/services/profil_service.js"></script>
+		<script src="app/services/menu_entry_service.js"></script>
+		<script src="app/services/authorizations_service.js"></script>
+		<script src="app/services/provider_service.js"></script>
+		<script src="app/services/payment_service.js"></script>
+		<script src="app/services/user_service.js"></script>
+		<script src="app/services/setting_service.js"></script>
+		<script src="app/services/traces_service.js"></script>
+        <script src="app/services/purchase_service.js"></script>
+        <script src="app/services/purchase_note_service.js"></script>
+		<script src="app/services/cash_transaction_service.js"></script>
+		<script src="app/services/cash_transaction_note_service.js"></script>
+		<script src="app/services/reglement_service.js"></script>
+
+
+        <script src="assets/utils.js"></script>
+        <script src="assets/error_messages.js"></script>
+
+	</head>
+	
+	<body class="{{bodyclass}}">
+		<div class="app layout-fixed-header"> 
+            
+            <div ng-if="bodyclass!='authentification'" ng:include="'app/menu/menu.html'"></div>
+			<section ng-view></section>
+            <!-- /content panel -->
+        </div>
+
+			
+
+	</body >
+</html>

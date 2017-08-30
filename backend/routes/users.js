@@ -6,8 +6,7 @@ const errorMessages = require('../util/errorMessages');
 
 router.get('/:id?', function (req, res, next) {
     if (req.params.id) {
-        return user
-            .findById(id, {})
+        return user.findById(id, {})
             .then((user) => {
                 if (!user) {
                     return res.status(404).send({
@@ -21,9 +20,9 @@ router.get('/:id?', function (req, res, next) {
     else {
         return user.findAll({
                 order: [
-                    ['createdAt', 'DESC'],
-                ],
-            })
+                            ['createdAt', 'DESC'],
+                        ],
+                    })
             .then((result) => {
                 return res.json(result);
             });
@@ -31,11 +30,9 @@ router.get('/:id?', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-
+    console.log(req);
     return user
-        .create({
-            title: req.body.title,
-        })
+        .create(req.body)
         .then((user) => res.status(201).send(user))
         .catch((error) => res.status(400).send(error));
 });
@@ -59,22 +56,10 @@ router.delete('/:id', function (req, res, next) {
 });
 
 router.put('/:id', function (req, res, next) {
-
-    return user
-        .findById(req.params.userId, {})
-        .then(user => {
-            if (!user) {
-                return res.status(404).send({
-                    message: errorMessages.USER_NOT_FOUND,
-                });
-            }
-            return user
-                .update({
-                    username: req.body.username || user.username,
-                })
-                .then(() => res.status(200).send(user))
-                .catch((error) => res.status(400).send(error));
-        })
+    var user = req.body;
+    user.id = req.params.userId;
+    return user.update(user)
+        .then(() => res.status(200).send(user))
         .catch((error) => res.status(400).send(error));
 });
 module.exports = router;
