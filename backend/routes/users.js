@@ -39,20 +39,15 @@ router.post('/', function (req, res, next) {
 
 
 router.delete('/:id', function (req, res, next) {
-    return User
-        .findById(req.params.id)
-        .then(user => {
-            if (!user) {
-                return res.status(400).send({
-                    message: errorMessages.USER_NOT_FOUND,
-                });
-            }
-            return user
-                .destroy()
-                .then(() => res.status(204).send())
-                .catch((error) => res.status(400).send(error));
-        })
-        .catch((error) => res.status(400).send(error));
+    User.destroy({
+        where: {
+            id: req.params.id
+        }
+    }).then(function (deletedRecords){
+        res.status(200).json(deletedRecords);
+    }).catch(function (error){
+        res.status(500).json(error);
+    });
 });
 
 router.put('/:id', function (req, res, next) {

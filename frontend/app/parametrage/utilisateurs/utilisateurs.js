@@ -178,14 +178,14 @@ controllers.controller('utilisateursController', ['$rootScope', '$scope', '$loca
         console.log("Delete user", user);
         $scope.clearErrorMessages();
         $scope.deleteUser = {
-            userId: user.userId
+            id: user.id
         };
 
         bootstrapModal.open('deleteModal')
     };
 
     $scope.saveDeleteUser = function () {
-       userService.delete($scope.deleteUser.userId,
+       userService.delete($scope.deleteUser.id,
             function (user) {
                 if (user.error != undefined) {
                     console.log("error when deleting user: ", user.error);
@@ -208,7 +208,7 @@ controllers.controller('utilisateursController', ['$rootScope', '$scope', '$loca
         console.log("Restore user", user)
         $scope.clearErrorMessages();
         $scope.restoreUser = {
-            userId: user.userId
+            userId: user.id
         }
         bootstrapModal.open('restoreModal')
     }
