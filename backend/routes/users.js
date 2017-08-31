@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
-const user = require('../models').users;
+const User = require('../models').users;
 const errorMessages = require('../util/errorMessages');
 
 
 router.get('/:id?', function (req, res, next) {
     if (req.params.id) {
-        return user.findById(id, {})
+        return User.findById(id, {})
             .then((user) => {
                 if (!user) {
                     return res.status(404).send({
@@ -18,7 +18,7 @@ router.get('/:id?', function (req, res, next) {
             .catch((error) => res.status(400).send(error));
     }
     else {
-        return user.findAll({
+        return User.findAll({
                 order: [
                             ['createdAt', 'DESC'],
                         ],
@@ -31,7 +31,7 @@ router.get('/:id?', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
     console.log(req);
-    return user
+    return User
         .create(req.body)
         .then((user) => res.status(201).send(user))
         .catch((error) => res.status(400).send(error));
@@ -39,7 +39,7 @@ router.post('/', function (req, res, next) {
 
 
 router.delete('/:id', function (req, res, next) {
-    return user
+    return User
         .findById(req.params.id)
         .then(user => {
             if (!user) {
@@ -56,10 +56,18 @@ router.delete('/:id', function (req, res, next) {
 });
 
 router.put('/:id', function (req, res, next) {
-    var user = req.body;
-    user.id = req.params.userId;
-    return user.update(user)
-        .then(() => res.status(200).send(user))
-        .catch((error) => res.status(400).send(error));
+    console.log(req.body);
+    console.log(req.params.id);
+    User.update(req.body, {
+        where: {
+            id: req.params.id
+        }
+    })
+        .then(function (updatedRecords) {
+            res.status(200).json(updatedRecords);
+        })
+        .catch(function (error){
+            res.status(500).json(error);
+        });
 });
 module.exports = router;
