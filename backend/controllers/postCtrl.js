@@ -1,65 +1,72 @@
 'use strict';
 const express = require('express'),
-    postService = require('../services/postService'),
     errorMessages = require('../util/errorMessages');
 
-const posts = {
-	list: (req, resp)=>{
-		const q = {
-			username: req.params.username
-		}
-		return postService
-				.findAll(q)
-				.then((data)=>{
-					resp.status(200).json(data);
-				});
-	},
-	get: (req, resp)=>{
-		const id = req.params.id;
-		return postService
-				.findById(id)
-				.then((data)=>{
-					if(data) {
-						resp.status(200).json(data);
-					} else {
-						resp.status(404).send(errorMessages.POST_NOT_FOUND);
-					}
-				});
-	},
-	create: (req, resp)=>{
-		const post = req.body;
-		post.id = req.params.userName;
-		logger.info('About to create post ', post);
-		return postService
-				.create(post)
-				.then((data)=>{
-					resp.json(data);
-				});
-	},
-	delete: (req, resp)=>{
-		const id = req.params.id;
-		logger.info('About to delete post ', id);
-		return postService
-				.deletePost(id)
-				.then((affectedRows)=>{
-					logger.info('rows deleted', affectedRows);
-					resp.status(200).end();
-				});
-	},
-	update: (req, resp)=>{
-		const id = req.params.id;
-		const post = req.body;
-		post.id = id;
-		return postService
-				.update(post)
-				.then((p)=>{
-					resp.status(200).end();
-				})
-				.catch(e=>{
-					resp.status(400).end();
-				});
-	}
+Post = require('../models/').posts;
 
-}
+module.exports= {
+    //Get a list of all authors using model.findAll()
+    index(req, res) {
+        Post.findAll({
+        })
+            .then(function (authors) {
+                res.status(200).json(authors);
+            })
+            .catch(function (error) {
+                res.status(500).json(error);
+            });
+    },
 
-export default operations;
+    //Get an author by the unique ID using model.findById()
+    show(req, res) {
+        Post.findById(req.params.id, {
+        })
+            .then(function (author) {
+                res.status(200).json(author);
+            })
+            .catch(function (error){
+                res.status(500).json(error);
+            });
+    },
+
+    //Create a new author using model.create()
+    create(req, res) {
+        Post.create(req.body)
+            .then(function (newPost) {
+                res.status(200).json(newPost);
+            })
+            .catch(function (error){
+                res.status(500).json(error);
+            });
+    },
+
+    //Edit an existing author details using model.update()
+    update(req, res) {
+        Post.update(req.body, {
+            where: {
+                id: req.params.id
+            }
+        })
+            .then(function (updatedRecords) {
+                res.status(200).json(updatedRecords);
+            })
+            .catch(function (error){
+                res.status(500).json(error);
+            });
+    },
+
+    //Delete an existing author by the unique ID using model.destroy()
+    delete(req, res) {
+        Post.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+            .then(function (deletedRecords) {
+                res.status(200).json(deletedRecords);
+            })
+            .catch(function (error){
+                res.status(500).json(error);
+            });
+    }
+};
