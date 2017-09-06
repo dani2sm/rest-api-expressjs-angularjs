@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
 
   });
 
+
   Category.associate = (models) => {
       Category.hasMany(models.posts,
           {
@@ -22,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
           }
       );
   };
+
   return Category;
 
 };

@@ -1,0 +1,81 @@
+<!-- page heading debut-->
+<div class="page-heading">
+	<ul class="breadcrumb">
+		<li><a href="#/administration">Administration</a></li>
+		<li class="active"> Gestions d'hbilitation </li>
+	</ul>
+</div>
+<!-- page heading end-->
+<div class="panel panel-default">
+	<div class="panel-body">
+		<!--
+          <div class="col-md-2">
+            <button type="button" class="btn btn-danger">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer
+            </button>
+          </div>
+          -->
+		<div class="col-md-3">
+			<button type="button" class="btn btn-default" data-toggle="modal" ng-click="nouveauModal()">
+				<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Nouveau Role
+			</button>
+		</div>
+		<form class="form-horizontal hidden">
+			<div class="form-group col-sm-8">
+				<label class="col-sm-6 control-label">Rechercher</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" ng-model="labelSearch">
+				</div>
+				<button type="button" class="btn btn-info" ng-click="findRoles()">
+					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
+<table class="table table-bordered table-striped table-hover table-condensed" ng-show="roles.length > 0">
+	<tr>
+		<!--
+        <th><input type="checkbox"></th>
+        -->
+		<th class="col-lg-5">Role</th>
+		<!-- <th>Détails</th> -->
+		<th>Modifier</th>
+		<th>Supprimer</th>
+	</tr>
+	<tr ng-repeat="role in roles"  ng-class="{'danger': role.deleted}">
+		<!--
+        <td><input type="checkbox"></td>
+        -->
+		<td>{{role.label}}</td>
+		<!--
+		<td>
+			<button type="button" class="btn btn-default btn-xs" data-toggle="modal"
+					ng-click="detailsModal(role)">
+				<span class="glyphicon glyphicon-modal-window" aria-hidden="true"></span>
+			</button>
+		</td>
+		-->
+		<td>
+			<button ng-show="!role.deleted" type="button" class="btn btn-default btn-xs" data-toggle="modal"
+					ng-click="modificationModal(role)">
+				<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+			</button>
+		</td>
+		<td>
+			<button type="button" class="btn btn-default btn-xs" ng-click="openRoleDelete(role)">
+				<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+			</button>
+			<button ng-show="role.deleted" type="button" class="btn btn-default btn-xs" ng-click="openRoleRestore(role)" >
+				<span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+			</button>
+		</td>
+	</tr>
+</table>
+
+
+<div ng:include="'app/views/roles/roles_nouveau.html'"></div>
+<div ng:include="'app/views/roles/roles_modification.html'"></div>
+<div ng:include="'app/views/roles/roles_details.html'"></div>
+<div ng:include="'app/views/roles/roles_suppression.html'"></div>
+<div ng:include="'app/views/roles/roles_restauration.html'"></div>

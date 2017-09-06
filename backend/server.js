@@ -6,6 +6,7 @@ const express = require('express'),
     methodOverride = require("method-override"),
     exphbs = require("express-handlebars"),
     routes = require("./controllers/taco_controller.js"),
+    roles = require('./routes/roles');
     users = require('./routes/users');
     posts = require('./routes/posts');
     sequelize = require('sequelize'),
@@ -30,6 +31,8 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 app.use("/", routes);
+
+app.use('/api/v1/roles', roles);
 app.use('/api/v1/users', users);
 app.use('/api/v1/posts', posts);
 

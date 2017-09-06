@@ -2,13 +2,13 @@
 
 controllers.controller('loginController', ['$rootScope', '$scope', '$location', 'userService', function($rootScope, $scope, $location, userService) {
 
-		$scope.login = "admin";
-		$scope.password = "admin";
-	
-		$scope.authenticate = function() {
-			console.log($scope.login, $scope.password);
-
-			userService.login($scope.login, $scope.password, loginSuccess, loginFailed);
+	$scope.authenticate = function(login, password) {
+			console.log(login, password);
+			var user = {
+				username : login,
+				password : password
+			};
+			userService.login(user, loginSuccess, loginFailed);
 		};
 		
 		function loginSuccess() {

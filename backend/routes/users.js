@@ -1,68 +1,15 @@
 var express = require('express');
+var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var router = express.Router();
-const User = require('../models').users;
-const errorMessages = require('../util/errorMessages');
+var   users = require('../controllers/userCtrl');
 
+router.post('/signup', users.signup);
+router.post('/authenticate', users.authenticate);
+router.get('/', users.index);
+router.get('/:id', users.show);
+router.post('/', users.create);
+router.put('/:id', users.update);
+router.put('/delete/:id', users.delete);
+router.delete('/:id', users.destroy);
 
-router.get('/:id?', function (req, res, next) {
-    if (req.params.id) {
-        return User.findById(id, {})
-            .then((user) => {
-                if (!user) {
-                    return res.status(404).send({
-                        message: errorMessages.USER_NOT_FOUND,
-                    });
-                }
-                return res.status(200).send(user);
-            })
-            .catch((error) => res.status(400).send(error));
-    }
-    else {
-        return User.findAll({
-                order: [
-                            ['createdAt', 'DESC'],
-                        ],
-                    })
-            .then((result) => {
-                return res.json(result);
-            });
-    }
-});
-
-router.post('/', function (req, res, next) {
-    console.log(req);
-    return User
-        .create(req.body)
-        .then((user) => res.status(201).send(user))
-        .catch((error) => res.status(400).send(error));
-});
-
-
-router.delete('/:id', function (req, res, next) {
-    User.destroy({
-        where: {
-            id: req.params.id
-        }
-    }).then(function (deletedRecords){
-        res.status(200).json(deletedRecords);
-    }).catch(function (error){
-        res.status(500).json(error);
-    });
-});
-
-router.put('/:id', function (req, res, next) {
-    console.log(req.body);
-    console.log(req.params.id);
-    User.update(req.body, {
-        where: {
-            id: req.params.id
-        }
-    })
-        .then(function (updatedRecords) {
-            res.status(200).json(updatedRecords);
-        })
-        .catch(function (error){
-            res.status(500).json(error);
-        });
-});
 module.exports = router;

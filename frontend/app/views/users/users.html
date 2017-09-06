@@ -1,0 +1,97 @@
+<!-- page heading debut-->
+<div class="page-heading">
+    <ul class="breadcrumb">
+        <li><a>Paramétrage</a></li>
+        <li class="active"> Utilisateurs</li>
+    </ul>
+</div>
+<!-- page heading end-->
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <span class="hidden">
+            <button type="button" class="btn btn-danger">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer
+            </button>
+        </span>
+        <span>
+            <button type="button" class="btn btn-default" ng-click="nouveauModal()" data-toggle="modal">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Nouveau
+            </button>
+        </span>
+        <span>
+            <button type="button" class="btn btn-info" ng-click="rechercheModal()">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Rechercher
+            </button>
+        </span>
+		<span ng-show="search">
+			<button type="button" class="btn btn-warning" data-toggle="modal" ng-click="clearSearch()">
+                <span class="glyphicon glyphicon-grain" aria-hidden="true"></span> Effacer Rechercher
+            </button>
+		</span>
+    </div>
+</div>
+<br/>
+<table class="table table-bordered table-striped table-hover table-condensed">
+    <tr>
+        <!--
+        <th><input type="checkbox"></th>
+        -->
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Username</th>
+        <th>Tél</th>
+        <th>Sexe</th>
+        <th>Date creation</th>
+        <th>Date update</th>
+        <th>Actions</th>
+    </tr>
+    <tr ng-repeat="user in users" ng-class="{'danger': user.deleted}">
+        <!--
+        <td>
+            <input type="checkbox">
+        </td>
+        -->
+        <td>{{user.firstname}}</td>
+        <td>{{user.lastname}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.phone}}</td>
+        <td><span ng-if="user.gender == 0">Femme</span><span ng-if="user.gender == 1">Homme</span></td>
+        <td>{{user.createdAt | date:"dd/MM/yyyy à HH:mm:ss"}}</td>
+        <td>{{user.updatedAt | date:"dd/MM/yyyy à HH:mm:ss"}}</td>
+        <td>
+            <button type="button" class="btn btn-default btn-group-sm" ng-click="detailsModal(user)" data-toggle="modal">
+                <span class="glyphicon glyphicon-modal-window" aria-hidden="true"></span>
+            </button>
+
+            <button type="button" class="btn btn-default btn-group-sm" ng-click="modificationModal(user)" data-toggle="modal">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            </button>
+
+            <button type="button" class="btn btn-default btn-group-sm" ng-click="deleteModal(user)">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </button>
+            <button ng-show="user.deleted" type="button" class="btn btn-default btn-group-sm" ng-click="openUserRestore(user)" >
+                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+            </button>
+        </td>
+    </tr>
+</table>
+<!--
+currentPage {{currentPage}}
+itemsPerPage {{itemsPerPage}}
+totalItems {{totalItems}}
+-->
+<pagination total-items="totalItems" items-per-page="itemsPerPage"
+            ng-model="currentPage" ng-change="pageChanged()"
+            previous-text="&laquo;"
+            next-text="&raquo;"></pagination>
+
+<div ng:include="'app/views/users/users_nouveau.html'"></div>
+<div ng:include="'app/views/users/users_modification.html'"></div>
+<div ng:include="'app/views/users/users_recherche.html'"></div>
+<div ng:include="'app/views/users/users_details.html'"></div>
+<div ng:include="'app/views/users/users_restauration.html'"></div>
+<div ng:include="'app/views/users/users_suppression.html'"></div>

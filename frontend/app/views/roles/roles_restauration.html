@@ -1,0 +1,33 @@
+<!-- Modal -->
+<div class="modal fade" id="restoreModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+          <div class="row">
+              <div class="col-lg-12">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Restauration</h4>
+              </div>
+          </div>
+
+      </div>
+      <div class="modal-body">
+          <row>
+              <div class="col-lg-12">
+                  <div class="alert alert-danger alert-dismissible" role="alert" ng-show="errorMessages.length > 0">
+                      <button type="button" class="close" ng-click="clearErrorMessages()" ><span aria-hidden="true">&times;</span></button>
+                      <strong ng-repeat="errorMessage in errorMessages">{{errorMessage}} <br></strong>
+                  </div>
+              </div>
+          </row>
+          <p>
+            Voulez-vous vraiment restaurer ce profil ?
+          </p>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-primary" ng-click="saveRestoreRole()">Oui</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
+      </div>
+    </div>
+  </div>
+</div>

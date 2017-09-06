@@ -1,32 +1,33 @@
 {
-    "name": "codexway",
-    "version": "0.0.1",
-    "description": "REST-api Node JS Sequelize Mysql ExpressJs AngularJs This is a proposal / example for creating restful APIs with Node JS, ExpressJS and AngularJS, sequelize and mysql.",
-    "main": "server.js",
-    "scripts": {
-        "test": ""
-    },
-    "repository": {
-        "type": "git",
-        "url": ""
-    },
-    "author": "DANI Fouad",
-    "license": "MIT",
-    "bugs": {
-        "url": ""
-    },
-    "homepage": "",
-    "dependencies": {
-        "body-parser": "^1.17.2",
-        "cookie-parser": "~1.4.3",
-        "cors": "^2.8.1",
-        "debug": "~2.2.0",
-        "express": "^4.15.4",
-        "express-handlebars": "^3.0.0",
-        "method-override": "^2.3.9",
-        "mysql": "^2.14.1",
-        "morgan": "~1.7.0",
-        "mysql2": "^1.4.0",
-        "sequelize": "^4.5.0"
-    }
+  "name": "codexway",
+  "version": "0.0.1",
+  "description": "REST-api Node JS Sequelize Mysql ExpressJs AngularJs This is a proposal / example for creating restful APIs with Node JS, ExpressJS and AngularJS, sequelize and mysql.",
+  "main": "server.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "DANI Fouad",
+  "license": "MIT",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.1",
+    "debug": "~2.2.0",
+    "express": "^4.15.4",
+    "express-handlebars": "^3.0.0",
+    "jsonwebtoken": "^7.4.3",
+    "method-override": "^2.3.9",
+    "morgan": "~1.7.0",
+    "mysql": "^2.14.1",
+    "mysql2": "^1.4.0",
+    "sequelize": "^4.5.0"
+  }
 }

@@ -2,11 +2,8 @@
 services.factory('userService', function($http) {
 	
 	return {
-        login:function(username, password, successCallBack, failureCallBack) {
-            $http.post("http://localhost:3000/api/v1/j_spring_security_check", {
-                j_username: username,
-                j_password: password
-            })
+        login:function(user, successCallBack, failureCallBack) {
+            $http.post("http://localhost:3000/api/v1/authenticate", user)
                 .success(function (data, status, headers, config) {
                     successCallBack(data, status, headers, config);
                 })
@@ -74,7 +71,7 @@ services.factory('userService', function($http) {
 
 		// Update function
 		delete:function(id, successCallBack, failureCallBack) {
-			$http.delete("http://localhost:3000/api/v1/users/" + id )
+			$http.put("http://localhost:3000/api/v1/users/delete/" + id )
 			.success(function (data, status, headers, config) {
 				successCallBack(data, status, headers, config);
 			})
@@ -82,6 +79,17 @@ services.factory('userService', function($http) {
 				failureCallBack(data, status, headers, config);
 			})
 		},
+
+    // Update function
+    destroy:function(id, successCallBack, failureCallBack) {
+      $http.delete("http://localhost:3000/api/v1/users/" + id )
+          .success(function (data, status, headers, config) {
+            successCallBack(data, status, headers, config);
+          })
+          .error(function (data, status, headers, config) {
+            failureCallBack(data, status, headers, config);
+          })
+    },
 		//restore
 		restore:function(id, successCallBack, failureCallBack) {
 		$http.get("http://localhost:3000/api/v1/users/restore/" + id , {
