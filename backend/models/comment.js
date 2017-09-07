@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     Comment.belongsTo(models.posts, {
       onDelete: 'CASCADE',
       foreignKey: {
-        field: "post_id",
+        field: "postId",
         allowNull: false
       }
     });

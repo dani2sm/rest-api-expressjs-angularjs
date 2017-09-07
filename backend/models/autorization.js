@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         Autorization.belongsTo(models.roles, {
             onDelete: 'CASCADE',
             foreignKey: {
-              field: "role_id",
+              field: "roleId",
               allowNull: false
             }
       });
@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         Autorization.belongsTo(models.operations, {
               onDelete: 'CASCADE',
               foreignKey: {
-                field: "operation_id",
+                field: "operationId",
                 allowNull: false
               }
     });
@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         Autorization.belongsTo(models.menu_entries, {
             onDelete: 'CASCADE',
             foreignKey: {
-              field: "menu_entry_id",
+              field: "menuEntryId",
               allowNull: false
             }
       });

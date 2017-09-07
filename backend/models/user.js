@@ -12,12 +12,18 @@ module.exports = (sequelize, DataTypes) => {
         email: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true
+            unique: true,
+            validate: {
+                isEmail: true
+            }
         },
         username: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true
+            unique: true,
+            validate: {
+                is: /^[a-z0-9\_\-]+$/i,
+            }
         },
         password: DataTypes.STRING,
         status: DataTypes.BOOLEAN,
@@ -36,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
     User.associate = (models) => {
         User.hasMany(models.posts,
             {
-                foreignKey: 'user_id'
+                foreignKey: 'userId'
             }
         );
     };
@@ -44,16 +50,16 @@ module.exports = (sequelize, DataTypes) => {
     User.associate = (models) => {
         User.hasMany(models.comments,
             {
-                foreignKey: 'user_id'
+                foreignKey: 'userId'
             }
         );
     };
 
     User.associate = (models) => {
         User.belongsToMany(models.roles, {
-            through: 'users_roles',
+            through: 'usersRoles',
             as: 'users_has_roles',
-            foreignKey: 'user_id'
+            foreignKey: 'userId'
         });
     };
 

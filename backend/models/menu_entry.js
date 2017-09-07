@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     MenyEntry.associate = (models) => {
         MenyEntry.hasMany(models.autorizations,
             {
-                foreignKey: 'menu_entry_id'
+                foreignKey: 'menuEntryId'
             }
         );
     };

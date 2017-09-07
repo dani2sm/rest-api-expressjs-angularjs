@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
       Post.belongsTo(models.users, {
         onDelete: 'CASCADE',
         foreignKey: {
-          field: "user_id",
+          field: "userId",
           allowNull: false
         }
       });
@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
     Post.belongsTo(models.categories, {
       onDelete: 'CASCADE',
       foreignKey: {
-        field: "category_id",
+        field: "categoryId",
         allowNull: false
       }
     });
@@ -52,23 +52,23 @@ module.exports = (sequelize, DataTypes) => {
       Post.belongsTo(models.medias, {
         onDelete: 'CASCADE',
         foreignKey: {
-          field: "media_id",
+          field: "mediaId",
           allowNull: false
         }
       });
     };
     Post.associate = (models) => {
         Post.belongsToMany(models.tags, {
-            through: 'posts_tags',
+            through: 'postsTags',
             as:'posts_has_tags',
-            foreignKey:'post_id'
+            foreignKey:'postId'
         });
     };
 
     Post.associate = (models) => {
         Post.hasMany(models.comments,
             {
-                foreignKey: 'post_id'
+                foreignKey: 'postId'
             }
         );
     };

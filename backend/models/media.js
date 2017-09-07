@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   Media.associate = (models) => {
     Media.hasMany(models.posts,
         {
-            foreignKey: 'media_id'
+            foreignKey: 'mediaId'
         }
     );
   };
