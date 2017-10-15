@@ -11,7 +11,7 @@ services:
 #        class: AppBundle\Serializer\Listener\PostListener
 #        tags:
 #            - { name: jms_serializer.event_subsciber }
-    serializer_handler.post:
-        class: AppBundle\Serializer\Handler\PostHandler
-        tags:
-            - { name: jms_serializer.subscribing_handler }
+#    serializer_handler.post:
+#        class: AppBundle\Serializer\Handler\PostHandler
+#        tags:
+#            - { name: jms_serializer.subscribing_handler }

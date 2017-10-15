@@ -62,6 +62,12 @@ class Post
      */
     private $updated_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User", cascade={"all"}, fetch="EAGER")
+     */
+
+    private $user;
+
     public function getId()
     {
         return $this->id;
@@ -150,5 +156,23 @@ class Post
     {
         $this->updated_at = $updated_at;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+    }
+
+
 
 }

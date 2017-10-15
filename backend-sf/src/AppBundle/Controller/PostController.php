@@ -3,7 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Post;
-use JMS\Serializer\SerializationContext;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -13,20 +14,24 @@ use Symfony\Component\HttpFoundation\Request;
 class PostController extends Controller
 {
     /**
-     * @Route("/posts/{id}", name="show_post")
+     * @Rest\Get(
+     *     path="/posts/{id}",
+     *     name="show_post",
+     *     requirements={"id" = "\d+"}
+     * )
+     * @Rest\View
      */
     public function showAction(Post $post)
     {
-        $data = $this->get('jms_serializer')
-            ->serialize($post, 'json', SerializationContext::create()->setGroups(array("detail")));
-
-        $response = new Response($data);
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
+        $data = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle\Entity\Post')
+            ->find($post->getId());
+        return $data ;
     }
 
     /**
+     * @Rest\Get()
      * @Route("/posts", name="create_post")
      * @Method({"POST"})
      */
@@ -45,21 +50,18 @@ class PostController extends Controller
     }
 
     /**
-     * @Route("/posts", name="posts_list")
-     * @Method({"GET"})
+     * @Rest\Get(
+     *     path="/posts",
+     *     name="list_posts"
+     * )
+     * @Rest\View
      */
     public function listAction()
     {
         $posts = $this->getDoctrine()
             ->getRepository('AppBundle:Post')
             ->findAll();
-        $data = $this->get('jms_serializer')
-            ->serialize($posts, 'json', SerializationContext::create()->setGroups(array("list")));
-
-        $response = new Response($data);
-        $response->headers
-            ->set('Content-Type', 'application/json');
-        return $response;
+        return $posts ;
 
     }
 }
